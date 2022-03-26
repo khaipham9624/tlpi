@@ -1,5 +1,5 @@
 static
- char *ename[] = {
+char *ename[] = {
 /* 0 */ "",
 /* 1 */ "EPERM", "ENOENT", "ESRCH", "EINTR", "EIO", "ENXIO", "E2BIG",
 /* 8 */ "ENOEXEC", "EBADF", "ECHILD", "EAGAIN/EWOULDBLOCK", "ENOMEM",

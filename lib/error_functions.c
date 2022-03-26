@@ -28,9 +28,9 @@ static void outputError(Boolean useErr, int err, Boolean flushStdout, const char
 
     vsnprintf(userMsg, BUF_SIZE, format, ap) ;
     if (useErr)
-        sprintf(errText, BUF_SIZE, " [%s %s]",
-                (err > 0 && err <= MAX_ENAME)?
-                ename[err]: "?UNKNOWN?", strerror(err));
+        snprintf(errText, BUF_SIZE, " [%s %s]",
+                (err > 0 && err <= MAX_ENAME) ?
+                ename[err] : "?UNKNOWN?", strerror(err));
     else
         snprintf(errText, BUF_SIZE, ":");
 
