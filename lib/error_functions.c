@@ -26,7 +26,7 @@ static void outputError(Boolean useErr, int err, Boolean flushStdout, const char
 #define BUF_SIZE 500
     char buf[BUF_SIZE], userMsg[BUF_SIZE], errText[BUF_SIZE];
 
-    vsnprintf(userMsg, BUF_SIZE, format, ap) ;
+    vsnprintf(userMsg, BUF_SIZE, format, ap);
     if (useErr)
         snprintf(errText, BUF_SIZE, " [%s %s]",
                 (err > 0 && err <= MAX_ENAME) ?
