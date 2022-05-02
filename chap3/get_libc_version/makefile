@@ -11,7 +11,7 @@ SRC_PATH := .
 DBG_PATH := debug
 
 # compile macros
-TARGET_NAME := main
+TARGET_NAME := get_libc_version
 ifeq ($(OS),Windows_NT)
 	TARGET_NAME := $(addsuffix .exe,$(TARGET_NAME))
 endif
