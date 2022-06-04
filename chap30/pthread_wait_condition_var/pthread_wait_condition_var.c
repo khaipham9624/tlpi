@@ -6,6 +6,8 @@ static pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 static pthread_mutex_t mux = PTHREAD_MUTEX_INITIALIZER;
 
 static int glob = 0;
+const static int low_threshold = 0;
+const static int high_threshold = 100;
 
 void* func_produce(void *args)
 {
@@ -16,17 +18,23 @@ void* func_produce(void *args)
         if (ret < 0)
             errExitEN(ret, "mutex lock");
         
-        printf("Produce %d \n", glob);
-        glob++;
+        // while (glob == high_threshold)
+        //     pthread_cond_wait(&cond, &mux);
+        //     if (ret < 0)
+        //         errExitEN(ret, "cond wait");
+        
+        while (glob < high_threshold)
+        {
+            glob++;
+            printf("Produce %d \n", glob);
+        }
 
         ret = pthread_mutex_unlock(&mux);
         if (ret < 0)
             errExitEN(ret, "mutex unlock");
         
-        // ret = pthread_cond_signal(&cond);
-        // if ()
-
-        ret = pthread_cond_broadcast(&cond);
+        ret = pthread_cond_signal(&cond);
+        // ret = pthread_cond_broadcast(&cond);
         if (ret < 0)
             errExitEN(ret, "cond signal");
     }
@@ -41,15 +49,17 @@ void* func_consume(void *args)
         if (ret < 0)
             errExitEN(ret, "mutex lock");
         
-        if (glob == 0)
-            pthread_cond_wait(&cond, &mux);
+        // This is a rule!
+        while (glob == low_threshold)
+            ret = pthread_cond_wait(&cond, &mux);
+            if (ret < 0)
+                errExitEN(ret, "cond wait");
         
-        // while (glob > -10)
-        while (glob > 0)
+        while (glob > low_threshold)
         {
             /* code */
-            printf("Consume %d \n", glob);
             glob--;
+            printf("Consume %d \n", glob);
         }
         
         ret = pthread_mutex_unlock(&mux);
