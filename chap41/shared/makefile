@@ -7,8 +7,13 @@ clean:
 	rm libmyMath.so.1.0
 	rm *.o
 
-main: main.cpp libmyMath.so.1.0
-	g++ -o main main.cpp libmyMath.so.1.0
+main: main.cpp libmyMath.so
+	g++ -o main main.cpp libmyMath.so
+
+
+
+	ln -s libmyMath.so.1.2 libmyMath.so.1
+	ln -s libmyMath.so.1 libmyMath.so
 
 # libmyMath.so: sum.o sub.o
 # 	g++ -shared -o libmyMath.so sum.o sub.o
@@ -16,7 +21,7 @@ main: main.cpp libmyMath.so.1.0
 
 # use soname
 libmyMath.so.1.0: sum.o sub.o
-	g++ -shared -Wl,-soname,libmyMath.so.1 -o libmyMath.so.1.0 sum.o sub.o
+	g++ -shared -Wl,-soname,libmyMath.so.2 -o libmyMath.so.2.0 sum.o sub.o
 	objdump -p libmyMath.so.1.0 |grep SONAME
 	readelf -d libmyMath.so.1.0 |grep SONAME
 	rm *.o
