@@ -1,7 +1,3 @@
-#include <sys/socket.h>
-#include <sys/un.h>
-#include <stdio.h>
-#include <string.h>
 #include "stream_socket.h"
 
 int main(){
