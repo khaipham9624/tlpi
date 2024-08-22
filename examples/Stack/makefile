@@ -2,7 +2,7 @@
 
 all: main
 
-main: main.cpp
+main: main.cpp Stack.h List.h
 	g++ -g -o main main.cpp
 
 clean:

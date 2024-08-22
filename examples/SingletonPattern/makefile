@@ -2,7 +2,7 @@
 
 all: main
 
-main: main.cpp
+main: main.cpp Singleton.h
 	g++ -o main main.cpp
 
 clean:
