@@ -1,9 +1,9 @@
 #pragma once
-
+#include <iostream>
 class Shape {
     public:
 
-        virtual Shape(){
+        Shape(){
             std::cout << "Shape constructor" << std::endl;
         }
         virtual ~Shape(){
